@@ -1,0 +1,26 @@
+"Obtener usuarios"
+type Query{
+    "Lista de usuarios registrados en la base clientes / Admin"
+    users: [User!]!
+}
+
+"""
+email = usuario de la base de datos
+Fecha de nacimiento y registro en formato ISO
+"""
+type User {
+    "Id de usuario"
+    id: ID!
+    "Nombre de usuario"
+    name: String!
+    "apellido de Usuario"
+    lastname: String!
+    "email de usuario"
+    email: String!
+    "contrasena"
+    password: String!
+    "Fecha de registro"
+    redisterDate: String!
+    "Fecha de nacimiento - solo usuarios de 18 anios"
+    birthday: String!
+}

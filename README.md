@@ -15,3 +15,7 @@ npm install express graphql ncp graphql-import-node compression cors graphql-too
 
 # Comando para correr aplicacion
 npm run dev
+
+# Librerias extras
+npm install dotenv
+npm install -D typescript-tslint-plugin

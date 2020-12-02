@@ -2,22 +2,31 @@ import express from 'express';
 import cors from 'cors';
 import compression from 'compression';
 import { createServer } from 'http';
+import environment from './config/environments';
 
-const app = express();
+if(process.env.NODE_ENV !== 'production'){
+    const env = environment;
+    console.log(env);
+}
 
-app.use('*', cors());
+async function init() {
+    const app = express();
 
-app.use(compression());
+    app.use('*', cors());
 
-app.get('/', (_, res) => {
-    res.send('on line E-shop MEAN+G');
-})
+    app.use(compression());
 
-const httpServer = createServer(app);
+    app.get('/', (_, res) => {
+        res.send('on line E-shop MEAN+G');
+    });
 
-httpServer.listen(
-    {
-    port: 2002
-    },
-    () => console.log('http://localhost:2002')
-)
+    const httpServer = createServer(app);
+    const PORT = process.env.PORT;
+    httpServer.listen(
+        {
+        port: PORT
+        },
+        () => console.log(`http://localhost:${PORT} Tienda On Line`)
+    );
+}
+init();
