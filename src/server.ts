@@ -6,6 +6,7 @@ import environment from './config/environments';
 import { ApolloServer } from 'apollo-server-express';
 import schema from './schema/index';
 import expressPlayground from 'graphql-playground-middleware-express';
+import DataBase from './lib/database';
 
 if(process.env.NODE_ENV !== 'production'){
     const env = environment;
@@ -19,10 +20,17 @@ async function init() {
 
     app.use(compression());
 
+    const database = new DataBase(); // constante del objeto Base de datos
+
+    const db = await database.init();
+
+    const context = { db } 
+
     /**se crea servidor apollo con esquema desde schema/intex.ts */
     const server = new ApolloServer({
         schema: schema,
-        introspection: true
+        introspection: true,
+        context
     });
 
     /** se aplica el middleware de la aplicacion */

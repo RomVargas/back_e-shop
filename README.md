@@ -19,3 +19,5 @@ npm run dev
 # Librerias extras
 npm install dotenv
 npm install -D typescript-tslint-plugin
+npm install mongodb
+npm install chalk

@@ -4,6 +4,10 @@ type Query{
     users: [User!]!
 }
 
+type Mutation {
+    register(user: UserInput!): Boolean
+}
+
 """
 email = usuario de la base de datos
 Fecha de nacimiento y registro en formato ISO
@@ -23,4 +27,32 @@ type User {
     redisterDate: String!
     "Fecha de nacimiento - solo usuarios de 18 anios"
     birthday: String!
+    "Permisos del usuario"
+    role: Role!
+}
+
+"Input para añadir los datos del usuario en el registro"
+input UserInput {
+    "Identificador no obligatorio"
+    id: ID
+    "Nombre de usuario"
+    name: String!
+    "apellido de Usuario"
+    lastname: String!
+    "email de usuario"
+    email: String!
+    "contrasena"
+    password: String!
+    "Fecha de registro"
+    redisterDate: String!
+    "Fecha de nacimiento - solo usuarios de 18 anios"
+    birthday: String!
+    "Permisos del usuario"
+    role: Role=CLIENT
+}
+
+
+enum Role {
+    CLIENT 
+    ADMIN
 }
