@@ -1,11 +1,43 @@
 "Obtener usuarios"
 type Query{
     "Lista de usuarios registrados en la base clientes / Admin"
-    users: [User]
+    users: ResultUsers
+    "Login para iniciar sesion"
+    login(email: String!, password: String!): ResultLogin
 }
 
 type Mutation {
     register(user: UserInput!): User!
+}
+
+"""
+Inteface para especificar propiedades obligatorias de la respuesta
+"""
+interface Result {
+    "Estado del operacion"
+    status: Boolean!
+    "mensaje dela operacion"
+    message: String!
+}
+
+type ResultUsers implements Result {
+    "Estado del operacion"
+    status: Boolean!
+    "mensaje dela operacion"
+    message: String!
+    "Lista de usuarios registrados en la base clientes / Admin"
+    users: [User!]!
+}
+
+type ResultLogin implements Result {
+    "Estado del operacion"
+    status: Boolean!
+    "mensaje dela operacion"
+    message: String!
+    "Lista de usuarios registrados en la base clientes / Admin"
+    user: User
+    "Informaciond el token del usuario logeado"
+    token: String
 }
 
 """
@@ -14,23 +46,23 @@ Fecha de nacimiento y registro en formato ISO
 """
 type User {
     "Id de usuario"
-    _id: ID
+    _id: ID!
     "identificador interno"
-    id: Int
+    id: Int!
     "Nombre de usuario"
-    name: String
+    name: String!
     "apellido de Usuario"
-    lastname: String
+    lastname: String!
     "email de usuario"
-    email: String
+    email: String!
     "contrasena"
-    password: String
+    password: String!
     "Fecha de registro"
-    registerDate: String
+    registerDate: String!
     "Fecha de nacimiento - solo usuarios de 18 anios"
-    birthday: String
+    birthday: String!
     "Permisos del usuario"
-    role: Role
+    role: Role!
 }
 
 "Input para añadir los datos del usuario en el registro"

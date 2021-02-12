@@ -21,3 +21,6 @@ npm install dotenv
 npm install -D typescript-tslint-plugin
 npm install mongodb
 npm install chalk
+npm install jsonwebtoken
+
+npm i --save-dev @types/jsonwebtoken -D
