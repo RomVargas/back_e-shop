@@ -1,6 +1,7 @@
 import { IResolvers } from 'graphql-tools';
-import { COLLECTIONS, EXPIRETIME } from '../config/constants';
+import { COLLECTIONS, EXPIRETIME, MESSAGES } from '../config/constants';
 import JWT from '../lib/jwt';
+import bcrypt from 'bcrypt';
 
 const queries: IResolvers  = {
     Query: {
@@ -24,16 +25,16 @@ const queries: IResolvers  = {
         },
         async login(_,{ email, password }, { db } ) {
             try {
-                const emailVerification = await db.collection(COLLECTIONS.USERS).findOne({email})
-                if(emailVerification === null){
+                const user = await db.collection(COLLECTIONS.USERS).findOne({email})
+                if(user === null){
                     return {
                         status: false,
                         message: "No se encontroe el usuario, favor de verificar",
                         token: null
                     }
                 } 
-                const user = await db.collection(COLLECTIONS.USERS).findOne({email, password})
-                if(user !== null){
+                const passwordCheck = bcrypt.compareSync(password, user.password);
+                if(passwordCheck !== null){
                     delete user.password;
                     delete user.birthday;
                     delete user.registerDate;
@@ -41,11 +42,11 @@ const queries: IResolvers  = {
                 return {
                     status: true,
                     message:
-                        user === null
+                        !passwordCheck
                         ? 'credenciales incorrectas, favor de verificar'
                         :  'Se encontro Usuario, login satisfactorio',
                     token:
-                        user === null 
+                        !passwordCheck
                         ? null 
                         : new JWT().sign({ user }, EXPIRETIME.H24) 
                 };
@@ -57,8 +58,24 @@ const queries: IResolvers  = {
                     token: null
                 }
             }
+        },
+        me(_, __, { token }){
+            console.log(token);
+            let info = new JWT().verify(token);
+            if(info === MESSAGES.TOKEN_VERIFICATION_FALIED){
+                return {
+                    status: false,
+                    message: info,
+                    user: null
+                };
+            }
+            return {
+                status: true,
+                message: 'Usuario verificado correctamente mediante token',
+                user: Object.values(info)[0]
+            };
         }
-    }
+    },
 };
 
 export default queries;

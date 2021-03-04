@@ -4,6 +4,7 @@ type Query{
     users: ResultUsers
     "Login para iniciar sesion"
     login(email: String!, password: String!): ResultLogin
+    me: ResultUser
 }
 
 type Mutation {
