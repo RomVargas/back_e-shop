@@ -1,6 +1,6 @@
 {
   "name": "back_e-shop",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Proyecto BackEnd API GraphQL Tienda on line",
   "main": "build/server.js",
   "scripts": {
