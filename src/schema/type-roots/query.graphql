@@ -1,0 +1,8 @@
+"Obtener usuarios"
+type Query{
+    "Lista de usuarios registrados en la base clientes / Admin"
+    users: ResultUsers
+    "Login para iniciar sesion"
+    login(email: String!, password: String!): ResultLogin
+    me: ResultUser
+}

@@ -1,0 +1,24 @@
+"""
+email = usuario de la base de datos
+Fecha de nacimiento y registro en formato ISO
+"""
+type User {
+    "Id de usuario"
+    _id: ID!
+    "identificador interno"
+    id: Int!
+    "Nombre de usuario"
+    name: String!
+    "apellido de Usuario"
+    lastname: String!
+    "email de usuario"
+    email: String!
+    "contrasena"
+    password: String!
+    "Fecha de registro"
+    registerDate: String!
+    "Fecha de nacimiento - solo usuarios de 18 anios"
+    birthday: String!
+    "Permisos del usuario"
+    role: Role!
+}
