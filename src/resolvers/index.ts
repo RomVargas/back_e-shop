@@ -1,6 +1,6 @@
-import  queries  from "./queries";
+import  queries  from "./query";
 import { IResolvers } from "graphql-tools";
-import mutation from './mutations';
+import mutation from './mutation';
 
 const resolvers: IResolvers  = {
     ...queries,

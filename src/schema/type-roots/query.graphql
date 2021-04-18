@@ -5,4 +5,6 @@ type Query{
     "Login para iniciar sesion"
     login(email: String!, password: String!): ResultLogin
     me: ResultUser
+    "Mostrar lsita de productos"
+    products: Boolean
 }
