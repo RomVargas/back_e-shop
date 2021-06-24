@@ -1,6 +1,7 @@
 import { IResolvers } from "graphql-tools";
 import { COLLECTIONS } from "../../config/constants";
-import bcrypt from 'bcrypt';
+//import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { asignDocumentId, findOneElement, insertOneElement } from "../../lib/db-operation";
 
 const resolversUserMutation: IResolvers  = {

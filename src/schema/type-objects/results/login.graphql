@@ -3,8 +3,8 @@ type ResultLogin implements Result {
     status: Boolean!
     "mensaje dela operacion"
     message: String!
-    "Lista de usuarios registrados en la base clientes / Admin"
-    user: User
     "Informaciond el token del usuario logeado"
     token: String
+    "Datos de usuario"
+    user: User
 }

@@ -1,7 +1,8 @@
 import { IResolvers } from 'graphql-tools';
 import { COLLECTIONS, EXPIRETIME, MESSAGES } from '../../config/constants';
 import JWT from '../../lib/jwt';
-import bcrypt from 'bcrypt';
+
+import bcrypt from 'bcryptjs';
 import { findElements, findOneElement } from '../../lib/db-operation';
 
 const resolversUserQueries: IResolvers  = {
